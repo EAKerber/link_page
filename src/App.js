@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter } from 'react-router-dom';
+import Adm from './pages/Adm/index';
+import Home from './pages/Home/index';
+import Login from './pages/Login/index';
+import Page404 from './pages/Page404/index';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const router = createBrowserRouter([
+  {
+    path: '/adm',
+    element: <Adm/>,
+  },
+  {
+    path: '/',
+    element: <Home/>,
+  },
+  {
+    path: '/login',
+    element: <Login/>,
+  },
+  {
+    path: '*',
+    element: <Page404/>,
+  },  
+]);
 
-export default App;
+export {router};
