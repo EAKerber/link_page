@@ -1,4 +1,7 @@
-import './home.css'
+import './home.css';
+import SocialMedia from '../../components/SocialMedia';
+
+import {FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa';
 
 function Home(){
     return(
@@ -27,6 +30,20 @@ function Home(){
                         <p className='link-text'>koo</p>
                     </a>
                 </section>
+                
+                <footer>
+                    <SocialMedia url='https://facebook.com' >
+                        <FaFacebook size={35} color='#fff' />
+                    </SocialMedia>
+                    <SocialMedia url='https://youtube.com' >
+                        <FaYoutube size={35} color='#fff' />
+                    </SocialMedia>
+                    <SocialMedia url='https://instagram.com' >
+                        <FaInstagram size={35} color='#fff' />
+                    </SocialMedia>
+
+                </footer>
+
             </main>
         </div>
     )
