@@ -1,5 +1,6 @@
 import './login.css';
-import Logo from '../../components/Logo';
+import Logo from '../../components/Logo/index';
+import Input from '../../components/Input/index'
 import { useState } from 'react';
 
 import { auth } from '../../services/firebaseConnection';
@@ -38,13 +39,13 @@ function Login(){
             <Logo/>
 
             <form className='form' onSubmit={handleLogin}>
-                <input
+                <Input
                     type="email"
                     placeholder='Digite seu Email'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                 />
-                <input
+                <Input
                     type='password'
                     placeholder='Digite sua Senha'
                     autoComplete='on'

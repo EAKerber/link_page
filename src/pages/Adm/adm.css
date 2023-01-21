@@ -1,0 +1,130 @@
+ .adm-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0px 10px;
+ }
+
+ .adm-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+ }
+
+ .label{
+    color: #fff;
+    font-weight: medium;
+    margin-top: 24px;
+    margin-bottom: 10px;
+ }
+
+ .colors-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 14px 0px;
+ }
+
+.colors-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.colors-selector{
+    width: 25px;
+    height: 25px;
+    border-radius: 6px;
+    
+}
+
+.colors-selector::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+.colors-selector::-webkit-color-swatch {
+	border: solid #fff 1.5px;
+    border-radius: 6px;
+}
+
+.right{
+    margin-right: 14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+ }
+
+.btn-register{
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    border-radius: 5px;
+    background-color: #3366ff;
+    border: 0px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.btn-register svg{
+    margin-left: 8px;
+}
+
+.title{
+    color: #fff;
+    margin: 28px 0px 14px 0px;
+}
+
+.list{
+    width: 90%; 
+    max-width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(36,136,36,0.35);
+    border-radius: 5px;
+    padding: 10px 8px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.btn-delete{
+    background-color: #000;
+    border: 1.5px dashed #fff;
+    color: #fff;
+    padding: 4px 6px;
+    border-radius: 5px;
+}
+
+.preview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px 20px 0px;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.label-preview{
+    color: #fff;
+    font-weight: medium;
+    margin-top: 10px;
+    margin-bottom: 10px;
+ }
+
+.animate-pop{
+    animation-duration: 500ms;
+    animation-name: animate-pop;
+}
+
+@keyframes animate-pop {
+  0%{
+    opacity: 0;
+    transform: scale(0.7, 0.7);
+  }  
+  100%{
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
