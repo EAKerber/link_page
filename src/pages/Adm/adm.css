@@ -3,7 +3,7 @@
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    padding: 0px 10px;
+    padding: 0px 10px 20px 10px;
  }
 
  .adm-form{
@@ -85,7 +85,12 @@
     border-radius: 5px;
     padding: 10px 8px;
     justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    transition: transform 400ms;
+}
+
+.list:hover{
+    transform: scale(1.04);
 }
 
 .btn-delete{
@@ -106,6 +111,7 @@
     border-radius: 5px;
 }
 
+
 .label-preview{
     color: #fff;
     font-weight: medium;
@@ -118,6 +124,19 @@
     animation-name: animate-pop;
 }
 
+.animate-out{
+    animation-duration: 500ms;
+    animation-name: animate-out;
+}
+
+p{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    max-width: 90%;
+}
+
 @keyframes animate-pop {
   0%{
     opacity: 0;
@@ -126,5 +145,16 @@
   100%{
     opacity: 1;
     transform: scale(1, 1);
+  }
+}
+
+@keyframes animate-out {
+  0%{
+    opacity: 1;
+    transform: scale(1, 1);
+  }  
+  100%{
+    opacity: 0;
+    transform: scale(0, 0);
   }
 }

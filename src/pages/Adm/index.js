@@ -6,7 +6,7 @@ import Input from '../../components/Input/index';
 import { MdLink } from 'react-icons/md';
 import { FiTrash2 } from 'react-icons/fi';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { db } from '../../services/firebaseConnection';
 import {
@@ -23,6 +23,45 @@ function Adm(){
 
     const [name, setName] = useState('');
     const [url, setUrl] = useState('');
+
+    const [delay, setDelay] = useState(false);
+
+    const [links, setLinks] = useState([]);
+
+
+
+    useEffect(()=>{
+        function fadeOut(t){
+            if(name){
+                setDelay(true);
+                return;
+            }else if(delay){
+                setTimeout(()=>setDelay(false),t);   
+            }              
+        }
+        fadeOut(480);
+    },[name, delay]);
+
+    useEffect(()=>{
+        const linksRef = collection(db, 'links');
+        const queryRef = query(linksRef, orderBy('created', 'asc'));
+
+        onSnapshot(queryRef, (snapshot)=>{
+            let lista = [];
+            snapshot.forEach((doc)=>{
+                lista.push({
+                    id: doc.id,
+                    name: doc.data().name,
+                    url: doc.data().url,
+                    backgroundColor: doc.data().linkBackgroundColor,
+                    textColor: doc.data().linkTextColor,
+                });
+            });
+            setLinks(lista);
+        });
+
+    }, []);
+
 
     async function handleRegister(e){
         e.preventDefault();
@@ -52,6 +91,18 @@ function Adm(){
             toast.error("Ops, erro ao salvar o link");
         });
 
+    }
+
+    async function handleDeleteLink(id, name){
+        const docRef = doc(db, 'links', id);
+        await deleteDoc(docRef)
+        .then(()=>{
+            toast.success(`Link "${name}" removido com sucesso`);
+        })
+        .catch((e)=>{
+            console.log(e);
+            toast.error("Ops, erro ao deletar o link");
+        });
     }
 
     return(
@@ -100,8 +151,8 @@ function Adm(){
 
                 </section>
 
-                {name&&
-                    <div className='preview' >
+                {delay&&
+                    <div className={'preview '+(name?'animate-pop':'animate-out')} >
                         <label className='label-preview' >Veja como está ficando 👇</label>
                         <article 
                             className='list'
@@ -109,7 +160,10 @@ function Adm(){
                         >
                             <p>{name}</p>
                             <div>
-                                <button className='btn-delete'>
+                                <button 
+                                    className='btn-delete'
+                                    onClick={(e)=>{e.preventDefault();}}
+                                >
                                     <FiTrash2 size={18} color='#fff' />
                                 </button>
                             </div>
@@ -126,16 +180,27 @@ function Adm(){
                 Meus Links
             </h2>
 
-            <article 
-                className='list animate-pop'
-            >
-                <p>Grupo telegram</p>
-                <div>
-                    <button className='btn-delete'>
-                        <FiTrash2 size={18} color='#fff' />
-                    </button>
-                </div>
-            </article>
+            {
+                links.map((link, index)=>{
+                    return(
+                        <article 
+                            key={index}
+                            className='list animate-pop'
+                            style={{backgroundColor:link.backgroundColor, color:link.textColor}}
+                        >
+                            <p>{link.name}</p>
+                            <div>
+                                <button 
+                                    className='btn-delete'
+                                    onClick={()=>handleDeleteLink(link.id, link.name)}                                
+                                >
+                                    <FiTrash2 size={18} color='#fff' />
+                                </button>
+                            </div>
+                        </article>
+                    );
+                })
+            }
 
         </div>
     )
